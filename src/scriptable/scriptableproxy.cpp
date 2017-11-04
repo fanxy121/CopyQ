@@ -439,7 +439,7 @@ ScriptableProxy::ScriptableProxy(MainWindow *mainWindow)
     : QObject(nullptr)
     , m_wnd(mainWindow)
     , m_tabName()
-    , m_invoked(false)
+    , m_invoked( QThread::currentThread() == qApp->thread() )
 {
     qRegisterMetaType< QPointer<QWidget> >("QPointer<QWidget>");
     moveToThread(m_wnd->thread());
